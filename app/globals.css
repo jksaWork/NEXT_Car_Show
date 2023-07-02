@@ -33,7 +33,7 @@
 }
 
 .custom-btn {
-  @apply flex flex-row relative justify-center items-center py-3 px-6 outline-none;
+  @apply flex flex-row relative justify-between gap-2 items-center py-3 px-6 outline-none;
 }
 /* END: General styles */
 
@@ -124,7 +124,7 @@
 }
 
 .car-card__icon-text {
-  @apply text-[14px] leading-[17px];
+  @apply text-[14px] leading-[17px] text-black-100 font-bold capitalize;
 }
 
 .car-card__btn-container {
