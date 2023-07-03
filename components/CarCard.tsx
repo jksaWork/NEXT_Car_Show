@@ -1,25 +1,29 @@
 "use client";
 import React, { useState } from "react";
+
 import Image from "next/image";
-import CustomButton from "./CustomButton";
-interface CartModel {
+import { CustomButton, CardDetails } from "./";
+import { calculateCarRent, generateCarImageUrl } from "@/utils";
+export interface CarModel {
   model: string;
   make: string;
   mpg: number;
   transmission: string;
   year: number;
   drive: string;
+  city_mpg: number;
   cityMPG: number;
 }
 interface CarCardProps {
-  car: CartModel;
+  car: CarModel;
 }
-function CarCard({
-  car: { make, model, transmission, mpg, cityMPG, drive },
-}: CarCardProps) {
+function CarCard({ car }: CarCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  let { make, model, transmission, mpg, city_mpg, drive, year, cityMPG } = car;
+  console.log(year, city_mpg);
+
   return (
-    <div className="car-card group">
+    <div className="car-card group cursor-pointer">
       <div className="car-card__content">
         <h2 className="car-card__content-title">
           {make} {"  "}
@@ -28,13 +32,13 @@ function CarCard({
       </div>
       <div className="flex mt-6 text-[23px] gap-1 font-extrabold">
         <span className="self-start text-[14px] font-semibold">$</span>
-        32
+        {calculateCarRent(city_mpg, year)}
         <span className="self-end text-[14px] font-medium">/day</span>
       </div>
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
           alt="Car Model"
-          src="/hero.png"
+          src={generateCarImageUrl(car)}
           fill
           className="object-contain"
         />
@@ -65,13 +69,21 @@ function CarCard({
         </div>
         <div className="car-card__btn-container">
           <CustomButton
+            btnType="button"
             title="View More"
             style="w-full py-[16px] rounded-full bg-primary-blue text-white text-[14px] leading-[17px] font-bold"
             rightIcon="/right-arrow.svg"
-            handleClick={() => setIsOpen(true)}
+            handelClick={() => setIsOpen(true)}
           />
         </div>
       </div>
+      <CardDetails
+        car={car}
+        isOpen={isOpen}
+        setIsOpen={() => {
+          setIsOpen(false);
+        }}
+      />
     </div>
   );
 }

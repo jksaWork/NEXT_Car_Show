@@ -8,6 +8,7 @@ function Navbar() {
       <div
         className="
       max-w-[1440px]
+      mx-auto
       flex justify-between items-between
       sm:px-16 px-6 py-4 bg-transparent
       "

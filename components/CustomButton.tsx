@@ -1,11 +1,11 @@
 "use client";
 import React, { HtmlHTMLAttributes, MouseEventHandler } from "react";
 import Image from "next/image";
-interface CustomButton {
+interface CustomButtonProps {
   title: string;
   disabled?: boolean;
   style?: string;
-  btnType: "submit" | "button";
+  btnType?: "submit" | "button";
   rightIcon?: string;
   handelClick?: MouseEventHandler<HTMLButtonElement>;
 }
@@ -17,13 +17,13 @@ function CustomButton({
   btnType,
   handelClick,
   rightIcon,
-}: CustomButton) {
+}: CustomButtonProps) {
   return (
     <button
       disabled={disabled}
-      className={`custom-btn w-full ${style} `}
+      className={`custom-btn ${style} `}
       onClick={handelClick}
-      type={btnType}
+      type={btnType ?? "button"}
     >
       <span className="flex-1 capitalize"> {title}</span>
       {rightIcon && (
